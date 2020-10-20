@@ -1,6 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 
 export default class MainScreen extends Component {
@@ -16,14 +22,30 @@ export default class MainScreen extends Component {
     return (
       <View
         style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
-        <Text
+        {/* <Text
           style={{color: '#28a845', fontSize: AppDimensions.getWidth() / 20}}>
           {word.en}
         </Text>
         <Text
           style={{color: '#dd3545', fontSize: AppDimensions.getWidth() / 20}}>
           {this.wordCheckMemorized(word)}
-        </Text>
+        </Text> */}
+        {/* <TouchableOpacity
+          onPress={function() {
+            alert('Click touchable');
+          }}
+          activeOpacity={0.1}>
+          <Text>TouchableOpacity</Text>
+        </TouchableOpacity> */}
+        {/* <TouchableHighlight onPress={_ => _} underlayColor="#f20">
+          <Text>TouchableHighlight</Text>
+        </TouchableHighlight> */}
+        {/* <TouchableWithoutFeedback
+          onLongPress={() => alert('Long press')}
+          delayLongPress={2000}
+          onPress={_ => _}>
+          <Text>TouchableWithoutFeedback</Text>
+        </TouchableWithoutFeedback> */}
       </View>
     );
   }
