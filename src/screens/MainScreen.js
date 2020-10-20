@@ -14,15 +14,6 @@ export default class MainScreen extends Component {
     ];
     return (
       <View style={styles.container}>
-        {/* {
-          [
-          <Text>{words[0].en}</Text>,
-          <Text>{words[1].en}</Text>,
-          <Text>{words[2].en}</Text>,
-          <Text>{words[3].en}</Text>,
-          <Text>{words[4].en}</Text>,
-          ]
-        } */}
         {words.map(word => {
           return (
             <View style={styles.containerWord} key={word.id.toString()}>
