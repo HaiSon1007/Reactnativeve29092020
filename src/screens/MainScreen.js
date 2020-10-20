@@ -1,12 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 
 export default class MainScreen extends Component {
@@ -20,33 +14,57 @@ export default class MainScreen extends Component {
   render() {
     const word = {en: 'One', vn: 'Một', isMemorized: true};
     return (
-      <View
-        style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
-        {/* <Text
-          style={{color: '#28a845', fontSize: AppDimensions.getWidth() / 20}}>
-          {word.en}
-        </Text>
-        <Text
-          style={{color: '#dd3545', fontSize: AppDimensions.getWidth() / 20}}>
-          {this.wordCheckMemorized(word)}
-        </Text> */}
-        {/* <TouchableOpacity
-          onPress={function() {
-            alert('Click touchable');
-          }}
-          activeOpacity={0.1}>
-          <Text>TouchableOpacity</Text>
-        </TouchableOpacity> */}
-        {/* <TouchableHighlight onPress={_ => _} underlayColor="#f20">
-          <Text>TouchableHighlight</Text>
-        </TouchableHighlight> */}
-        {/* <TouchableWithoutFeedback
-          onLongPress={() => alert('Long press')}
-          delayLongPress={2000}
-          onPress={_ => _}>
-          <Text>TouchableWithoutFeedback</Text>
-        </TouchableWithoutFeedback> */}
+      <View style={styles.container}>
+        <View style={styles.containerText}>
+          <Text style={styles.textEn}>{word.en}</Text>
+          <Text style={styles.textVn}>{this.wordCheckMemorized(word)}</Text>
+        </View>
+        <View style={styles.containerTouchable}>
+          <TouchableOpacity style={styles.touchableMemorized}>
+            <Text style={styles.textSize}>isMemorized</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.touchableRemove}>
+            <Text style={styles.textSize}>Remove</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    height: AppDimensions.getHeight() / 7,
+    justifyContent: 'space-evenly',
+  },
+  containerText: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  textEn: {
+    color: '#28a845',
+    fontSize: AppDimensions.getWidth() / 20,
+  },
+  textVn: {
+    color: '#dd3545',
+    fontSize: AppDimensions.getWidth() / 20,
+  },
+  containerTouchable: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  touchableMemorized: {
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: '#28a845',
+  },
+  textSize: {
+    fontSize: AppDimensions.getWidth() / 20,
+  },
+  touchableRemove: {
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: '#FFC106',
+  },
+});
