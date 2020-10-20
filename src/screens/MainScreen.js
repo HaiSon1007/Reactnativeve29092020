@@ -5,29 +5,50 @@ import AppDimensions from '../utils/AppDimensions';
 
 export default class MainScreen extends Component {
   render() {
-    const word = {en: 'One', vn: 'Một', isMemorized: false};
+    const words = [
+      {id: 1, en: 'One', vn: 'Một', isMemorized: false},
+      {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
+      {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
+      {id: 4, en: 'Four', vn: 'Bon', isMemorized: true},
+      {id: 5, en: 'Five', vn: 'Nam', isMemorized: false},
+    ];
     return (
       <View style={styles.container}>
-        <View style={styles.containerText}>
-          <Text style={styles.textEn}>{word.en}</Text>
-          <Text style={styles.textVn}>
-            {word.isMemorized ? '----' : word.vn}
-          </Text>
-        </View>
-        <View style={styles.containerTouchable}>
-          <TouchableOpacity
-            style={{
-              ...styles.touchableMemorized,
-              backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
-            }}>
-            <Text style={styles.textSize}>
-              {word.isMemorized ? 'Memorized' : 'Forgot'}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.touchableRemove}>
-            <Text style={styles.textSize}>Remove</Text>
-          </TouchableOpacity>
-        </View>
+        {/* {
+          [
+          <Text>{words[0].en}</Text>,
+          <Text>{words[1].en}</Text>,
+          <Text>{words[2].en}</Text>,
+          <Text>{words[3].en}</Text>,
+          <Text>{words[4].en}</Text>,
+          ]
+        } */}
+        {words.map(word => {
+          return (
+            <View style={styles.containerWord} key={word.id.toString()}>
+              <View style={styles.containerText}>
+                <Text style={styles.textEn}>{word.en}</Text>
+                <Text style={styles.textVn}>
+                  {word.isMemorized ? '----' : word.vn}
+                </Text>
+              </View>
+              <View style={styles.containerTouchable}>
+                <TouchableOpacity
+                  style={{
+                    ...styles.touchableMemorized,
+                    backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
+                  }}>
+                  <Text style={styles.textSize}>
+                    {word.isMemorized ? 'Memorized' : 'Forgot'}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.touchableRemove}>
+                  <Text style={styles.textSize}>Remove</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          );
+        })}
       </View>
     );
   }
@@ -35,9 +56,16 @@ export default class MainScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  containerWord: {
     flexDirection: 'column',
     height: AppDimensions.getHeight() / 7,
     justifyContent: 'space-evenly',
+    backgroundColor: '#F0F0F0',
+    marginTop: 10,
+    marginHorizontal: 10,
+    borderRadius: 10,
   },
   containerText: {
     flexDirection: 'row',
