@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
+import Box from '../components/Box';
 
 export default class MainScreen extends Component {
   render() {
@@ -14,32 +15,7 @@ export default class MainScreen extends Component {
     ];
     return (
       <View style={styles.container}>
-        {words.map(word => {
-          return (
-            <View style={styles.containerWord} key={word.id.toString()}>
-              <View style={styles.containerText}>
-                <Text style={styles.textEn}>{word.en}</Text>
-                <Text style={styles.textVn}>
-                  {word.isMemorized ? '----' : word.vn}
-                </Text>
-              </View>
-              <View style={styles.containerTouchable}>
-                <TouchableOpacity
-                  style={{
-                    ...styles.touchableMemorized,
-                    backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
-                  }}>
-                  <Text style={styles.textSize}>
-                    {word.isMemorized ? 'Memorized' : 'Forgot'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.touchableRemove}>
-                  <Text style={styles.textSize}>Remove</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          );
-        })}
+        <Box />
       </View>
     );
   }
@@ -88,3 +64,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFC106',
   },
 });
+
+/* 
+{words.map(word => {
+          return (
+            <View style={styles.containerWord} key={word.id.toString()}>
+              <View style={styles.containerText}>
+                <Text style={styles.textEn}>{word.en}</Text>
+                <Text style={styles.textVn}>
+                  {word.isMemorized ? '----' : word.vn}
+                </Text>
+              </View>
+              <View style={styles.containerTouchable}>
+                <TouchableOpacity
+                  style={{
+                    ...styles.touchableMemorized,
+                    backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
+                  }}>
+                  <Text style={styles.textSize}>
+                    {word.isMemorized ? 'Memorized' : 'Forgot'}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.touchableRemove}>
+                  <Text style={styles.textSize}>Remove</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          );
+        })}
+*/
