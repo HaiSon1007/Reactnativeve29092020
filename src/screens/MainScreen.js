@@ -4,24 +4,25 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 
 export default class MainScreen extends Component {
-  wordCheckMemorized = word => {
-    if (word.isMemorized) {
-      return '----';
-    } else {
-      return word.vn;
-    }
-  };
   render() {
-    const word = {en: 'One', vn: 'Một', isMemorized: true};
+    const word = {en: 'One', vn: 'Một', isMemorized: false};
     return (
       <View style={styles.container}>
         <View style={styles.containerText}>
           <Text style={styles.textEn}>{word.en}</Text>
-          <Text style={styles.textVn}>{this.wordCheckMemorized(word)}</Text>
+          <Text style={styles.textVn}>
+            {word.isMemorized ? '----' : word.vn}
+          </Text>
         </View>
         <View style={styles.containerTouchable}>
-          <TouchableOpacity style={styles.touchableMemorized}>
-            <Text style={styles.textSize}>isMemorized</Text>
+          <TouchableOpacity
+            style={{
+              ...styles.touchableMemorized,
+              backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
+            }}>
+            <Text style={styles.textSize}>
+              {word.isMemorized ? 'Memorized' : 'Forgot'}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.touchableRemove}>
             <Text style={styles.textSize}>Remove</Text>
