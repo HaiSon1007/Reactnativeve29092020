@@ -7,12 +7,33 @@ import {
   TextInput,
 } from 'react-native';
 export default class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      txtEn: '',
+      txtVn: '',
+    };
+  }
   render() {
     return (
       <View>
         <View style={styles.containerTextInput}>
-          <TextInput style={styles.textInput} />
-          <TextInput style={styles.textInput} />
+          <TextInput
+            onChangeText={text => {
+              this.state.txtEn = text;
+            }}
+            keyboardType="ascii-capable"
+            placeholder="English"
+            style={styles.textInput}
+          />
+          <TextInput
+            onChangeText={text => {
+              this.state.txtVn = text;
+            }}
+            keyboardType="ascii-capable"
+            placeholder="Viet Namese"
+            style={styles.textInput}
+          />
         </View>
         <View style={styles.containerTouchable}>
           <TouchableOpacity
