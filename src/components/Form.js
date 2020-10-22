@@ -12,43 +12,56 @@ export default class Form extends Component {
     this.state = {
       txtEn: '',
       txtVn: '',
+      shouldShowForm: false,
     };
   }
+  toggleForm = () => {
+    this.setState({shouldShowForm: !this.state.shouldShowForm});
+  };
+  renderForm = shouldShowForm => {
+    if (shouldShowForm) {
+      return (
+        <View>
+          <View style={styles.containerTextInput}>
+            <TextInput
+              onChangeText={text => (this.state.textEn = text)}
+              ref={refs => (this.textInputEn = refs)}
+              placeholder="English"
+              style={styles.textInput}
+            />
+            <TextInput
+              onChangeText={text => (this.state.textVn = text)}
+              ref={refs => (this.textInputVn = refs)}
+              placeholder="Vietnamese"
+              style={styles.textInput}
+            />
+          </View>
+          <View style={styles.containerTouchable}>
+            <TouchableOpacity
+              onPress={this.addWord}
+              style={styles.touchableAddword}>
+              <Text style={styles.textTouchable}>Add word</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.toggleForm()}
+              style={styles.touchableCancel}>
+              <Text style={styles.textTouchable}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => this.toggleForm()}
+          style={styles.buttonOpenForm}>
+          <Text style={styles.textOpenForm}>+</Text>
+        </TouchableOpacity>
+      );
+    }
+  };
   render() {
-    return (
-      <View>
-        <View style={styles.containerTextInput}>
-          <TextInput
-            onChangeText={text => {
-              this.state.txtEn = text;
-            }}
-            keyboardType="ascii-capable"
-            placeholder="English"
-            style={styles.textInput}
-          />
-          <TextInput
-            onChangeText={text => {
-              this.state.txtVn = text;
-            }}
-            keyboardType="ascii-capable"
-            placeholder="Viet Namese"
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.containerTouchable}>
-          <TouchableOpacity
-            onPress={this.addWord}
-            style={styles.touchableAddword}>
-            <Text style={styles.textTouchable}>Add word</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.props.toggleForm}
-            style={styles.touchableCancel}>
-            <Text style={styles.textTouchable}>Cancel</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
+    return this.renderForm(this.state.shouldShowForm);
   }
 }
 
