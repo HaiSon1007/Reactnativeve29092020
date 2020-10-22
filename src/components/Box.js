@@ -9,6 +9,12 @@ export default class Box extends Component {
       count: 10,
     };
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.count !== this.state.count) {
+      return false;
+    }
+    return true;
+  }
   render() {
     console.log('render');
     return (
