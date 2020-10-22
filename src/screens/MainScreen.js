@@ -1,6 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 import Box from '../components/Box';
 
@@ -15,6 +21,9 @@ export default class MainScreen extends Component {
         {id: 4, en: 'Four', vn: 'Bon', isMemorized: true},
         {id: 5, en: 'Five', vn: 'Nam', isMemorized: false},
       ],
+      txtEn: '',
+      txtVn: '',
+      shouldShowForm: false,
     };
   }
   toggleWord = word => {
@@ -35,38 +44,83 @@ export default class MainScreen extends Component {
     });
     this.setState({words: newWords});
   };
+  toggleForm = () => {
+    this.setState({shouldShowForm: !this.state.shouldShowForm});
+  };
+  renderForm = shouldShowForm => {
+    if (shouldShowForm) {
+      return (
+        <View>
+          <View style={styles.containerTextInput}>
+            <TextInput
+              onChangeText={text => (this.state.textEn = text)}
+              ref={refs => (this.textInputEn = refs)}
+              placeholder="English"
+              style={styles.textInput}
+            />
+            <TextInput
+              onChangeText={text => (this.state.textVn = text)}
+              ref={refs => (this.textInputVn = refs)}
+              placeholder="Vietnamese"
+              style={styles.textInput}
+            />
+          </View>
+          <View style={styles.containerTouchableForm}>
+            <TouchableOpacity style={styles.touchableAddword}>
+              <Text style={styles.textTouchable}>Add word</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.toggleForm()}
+              style={styles.touchableCancel}>
+              <Text style={styles.textTouchable}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => this.toggleForm()}
+          style={styles.buttonOpenForm}>
+          <Text style={styles.textOpenForm}>+</Text>
+        </TouchableOpacity>
+      );
+    }
+  };
+  renderItemWord = word => {
+    return (
+      <View style={styles.containerWord} key={word.id.toString()}>
+        <View style={styles.containerText}>
+          <Text style={styles.textEn}>{word.en}</Text>
+          <Text style={styles.textVn}>
+            {word.isMemorized ? '----' : word.vn}
+          </Text>
+        </View>
+        <View style={styles.containerTouchable}>
+          <TouchableOpacity
+            onPress={() => this.toggleWord(word)}
+            style={{
+              ...styles.touchableMemorized,
+              backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
+            }}>
+            <Text style={styles.textSize}>
+              {word.isMemorized ? 'Memorized' : 'Forgot'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.removeWord(word)}
+            style={styles.touchableRemove}>
+            <Text style={styles.textSize}>Remove</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
-        {this.state.words.map(word => {
-          return (
-            <View style={styles.containerWord} key={word.id.toString()}>
-              <View style={styles.containerText}>
-                <Text style={styles.textEn}>{word.en}</Text>
-                <Text style={styles.textVn}>
-                  {word.isMemorized ? '----' : word.vn}
-                </Text>
-              </View>
-              <View style={styles.containerTouchable}>
-                <TouchableOpacity
-                  onPress={() => this.toggleWord(word)}
-                  style={{
-                    ...styles.touchableMemorized,
-                    backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
-                  }}>
-                  <Text style={styles.textSize}>
-                    {word.isMemorized ? 'Memorized' : 'Forgot'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.removeWord(word)}
-                  style={styles.touchableRemove}>
-                  <Text style={styles.textSize}>Remove</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          );
-        })}
+        {this.renderForm(this.state.shouldShowForm)}
+        {this.state.words.map(word => this.renderItemWord(word))}
       </View>
     );
   }
@@ -113,5 +167,50 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     backgroundColor: '#FFC106',
+  },
+  containerTextInput: {
+    width: '100%',
+    height: 150,
+    justifyContent: 'space-evenly',
+  },
+  textInput: {
+    borderWidth: 1,
+    height: 60,
+    fontSize: 20,
+    marginHorizontal: 10,
+    paddingHorizontal: 10,
+  },
+  touchableAddword: {
+    backgroundColor: '#218838',
+    padding: 15,
+    borderRadius: 10,
+  },
+  textTouchable: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '500',
+  },
+  touchableCancel: {
+    backgroundColor: 'red',
+    padding: 15,
+    borderRadius: 10,
+  },
+  buttonOpenForm: {
+    marginHorizontal: 10,
+    height: 50,
+    backgroundColor: '#45B157',
+    borderRadius: 5,
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textOpenForm: {
+    color: 'white',
+    fontSize: 30,
+  },
+  containerTouchableForm: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginBottom: 10,
   },
 });

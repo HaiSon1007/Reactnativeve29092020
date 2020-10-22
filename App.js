@@ -7,8 +7,8 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
-        {/* <MainScreen /> */}
-        <Form />
+        <MainScreen />
+        {/* <Form /> */}
       </SafeAreaView>
     );
   }
