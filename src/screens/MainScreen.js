@@ -25,6 +25,7 @@ export default class MainScreen extends Component {
       txtEn: '',
       txtVn: '',
       shouldShowForm: false,
+      filterMode: null,
     };
   }
   toggleWord = word => {
@@ -121,10 +122,10 @@ export default class MainScreen extends Component {
             onPress={() => this.toggleWord(word)}
             style={{
               ...styles.touchableMemorized,
-              backgroundColor: word.isMemorized ? '#DD3444' : '#28a845',
+              backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
             }}>
             <Text style={styles.textSize}>
-              {word.isMemorized ? 'Memorized' : 'Forgot'}
+              {word.isMemorized ? 'Forgot' : 'Memorized'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -140,7 +141,22 @@ export default class MainScreen extends Component {
     return (
       <View style={styles.containerPickerStyle}>
         <RNPickerSelect
-          onValueChange={value => {}}
+          onDonePress={() => {
+            const {filterMode, words} = this.state;
+            const newWords = words.filter(word => {
+              if (filterMode === 'Show_All') {
+                return true;
+              } else if (filterMode === 'Show_Forgot' && word.isMemorized) {
+                return true;
+              } else if (filterMode === 'Show_Memorized' && !word.isMemorized) {
+                return true;
+              } else {
+                return false;
+              }
+            });
+            this.setState({words: newWords});
+          }}
+          onValueChange={value => (this.state.filterMode = value)}
           items={[
             {label: 'Show All', value: 'Show_All'},
             {label: 'Show Forgot', value: 'Show_Forgot'},
