@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {
@@ -47,26 +48,45 @@ export default class MainScreen extends Component {
   toggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
+  addWord = () => {
+    const {txtEn, txtVn, words} = this.state;
+    const newWords = Object.assign([], words);
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      return alert('Ban chưa nhập đủ thông tin');
+    }
+    const newWord = {
+      id: words.length + 1,
+      en: txtEn,
+      vn: txtVn,
+      isMemorized: false,
+    };
+    newWords.unshift(newWord);
+    this.setState({words: newWords, txtEn: '', txtVn: ''});
+    this.textInputEn.clear();
+    this.textInputVn.clear();
+  };
   renderForm = shouldShowForm => {
     if (shouldShowForm) {
       return (
         <View>
           <View style={styles.containerTextInput}>
             <TextInput
-              onChangeText={text => (this.state.textEn = text)}
+              onChangeText={text => (this.state.txtEn = text)}
               ref={refs => (this.textInputEn = refs)}
               placeholder="English"
               style={styles.textInput}
             />
             <TextInput
-              onChangeText={text => (this.state.textVn = text)}
+              onChangeText={text => (this.state.txtVn = text)}
               ref={refs => (this.textInputVn = refs)}
               placeholder="Vietnamese"
               style={styles.textInput}
             />
           </View>
           <View style={styles.containerTouchableForm}>
-            <TouchableOpacity style={styles.touchableAddword}>
+            <TouchableOpacity
+              onPress={this.addWord}
+              style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
