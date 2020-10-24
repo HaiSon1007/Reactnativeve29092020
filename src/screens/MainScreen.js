@@ -9,7 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
-import Box from '../components/Box';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -136,10 +136,25 @@ export default class MainScreen extends Component {
       </View>
     );
   };
+  renderFilter = () => {
+    return (
+      <View style={styles.containerPickerStyle}>
+        <RNPickerSelect
+          onValueChange={value => {}}
+          items={[
+            {label: 'Show All', value: 'Show_All'},
+            {label: 'Show Forgot', value: 'Show_Forgot'},
+            {label: 'Show Memorized', value: 'Show_Memorized'},
+          ]}
+        />
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
         {this.renderForm(this.state.shouldShowForm)}
+        {this.renderFilter()}
         {this.state.words.map(word => this.renderItemWord(word))}
       </View>
     );
@@ -232,5 +247,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginBottom: 10,
+  },
+  containerPickerStyle: {
+    borderWidth: 1,
+    borderRadius: 1,
+    borderColor: 'black',
+    padding: 20,
+    marginHorizontal: 10,
+  },
+  pickerStyle: {
+    padding: 50,
   },
 });
