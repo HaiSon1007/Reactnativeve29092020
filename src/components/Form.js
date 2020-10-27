@@ -12,25 +12,21 @@ export default class Form extends Component {
     this.state = {
       txtEn: '',
       txtVn: '',
-      shouldShowForm: false,
     };
   }
-  toggleForm = () => {
-    this.setState({shouldShowForm: !this.state.shouldShowForm});
-  };
   renderForm = shouldShowForm => {
     if (shouldShowForm) {
       return (
         <View>
           <View style={styles.containerTextInput}>
             <TextInput
-              onChangeText={text => (this.state.textEn = text)}
+              onChangeText={text => (this.state.txtEn = text)}
               ref={refs => (this.textInputEn = refs)}
               placeholder="English"
               style={styles.textInput}
             />
             <TextInput
-              onChangeText={text => (this.state.textVn = text)}
+              onChangeText={text => (this.state.txtVn = text)}
               ref={refs => (this.textInputVn = refs)}
               placeholder="Vietnamese"
               style={styles.textInput}
@@ -61,7 +57,7 @@ export default class Form extends Component {
     }
   };
   render() {
-    return this.renderForm(this.state.shouldShowForm);
+    return this.renderForm(this.props.shouldShowForm);
   }
 }
 

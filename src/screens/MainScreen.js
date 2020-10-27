@@ -11,6 +11,7 @@ import {
 import AppDimensions from '../utils/AppDimensions';
 import RNPickerSelect from 'react-native-picker-select';
 import Word from '../components/Word';
+import Form from '../components/Form';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -23,8 +24,6 @@ export default class MainScreen extends Component {
         {id: 4, en: 'Four', vn: 'Bon', isMemorized: true},
         {id: 5, en: 'Five', vn: 'Nam', isMemorized: false},
       ],
-      txtEn: '',
-      txtVn: '',
       shouldShowForm: false,
       filterMode: null,
     };
@@ -67,48 +66,6 @@ export default class MainScreen extends Component {
     this.textInputEn.clear();
     this.textInputVn.clear();
   };
-  renderForm = shouldShowForm => {
-    if (shouldShowForm) {
-      return (
-        <View>
-          <View style={styles.containerTextInput}>
-            <TextInput
-              onChangeText={text => (this.state.txtEn = text)}
-              ref={refs => (this.textInputEn = refs)}
-              placeholder="English"
-              style={styles.textInput}
-            />
-            <TextInput
-              onChangeText={text => (this.state.txtVn = text)}
-              ref={refs => (this.textInputVn = refs)}
-              placeholder="Vietnamese"
-              style={styles.textInput}
-            />
-          </View>
-          <View style={styles.containerTouchableForm}>
-            <TouchableOpacity
-              onPress={this.addWord}
-              style={styles.touchableAddword}>
-              <Text style={styles.textTouchable}>Add word</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.toggleForm()}
-              style={styles.touchableCancel}>
-              <Text style={styles.textTouchable}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          onPress={() => this.toggleForm()}
-          style={styles.buttonOpenForm}>
-          <Text style={styles.textOpenForm}>+</Text>
-        </TouchableOpacity>
-      );
-    }
-  };
   renderFilter = () => {
     return (
       <View style={styles.containerPickerStyle}>
@@ -128,7 +85,7 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderForm(this.state.shouldShowForm)}
+        <Form shouldShowForm={this.state.shouldShowForm} />
         {this.renderFilter()}
         <Word filterMode={this.state.filterMode} data={this.state.words} />
       </View>
