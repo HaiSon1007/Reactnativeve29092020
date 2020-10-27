@@ -14,6 +14,16 @@ export default class Form extends Component {
       txtVn: '',
     };
   }
+  addWord = () => {
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      return alert('Ban chưa nhập đủ thông tin');
+    }
+    this.props.onAddWord(txtEn, txtVn);
+    this.setState({txtEn: '', txtVn: ''});
+    this.textInputEn.clear();
+    this.textInputVn.clear();
+  };
   renderForm = shouldShowForm => {
     if (shouldShowForm) {
       return (

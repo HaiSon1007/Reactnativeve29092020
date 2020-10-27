@@ -42,12 +42,9 @@ export default class MainScreen extends Component {
   onToggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
-  addWord = () => {
-    const {txtEn, txtVn, words} = this.state;
+  onAddWord = (txtEn, txtVn) => {
+    const {words} = this.state;
     const newWords = Object.assign([], words);
-    if (txtEn.length <= 0 || txtVn.length <= 0) {
-      return alert('Ban chưa nhập đủ thông tin');
-    }
     const newWord = {
       id: words.length + 1,
       en: txtEn,
@@ -55,14 +52,13 @@ export default class MainScreen extends Component {
       isMemorized: false,
     };
     newWords.unshift(newWord);
-    this.setState({words: newWords, txtEn: '', txtVn: ''});
-    this.textInputEn.clear();
-    this.textInputVn.clear();
+    this.setState({words: newWords});
   };
   render() {
     return (
       <View style={styles.container}>
         <Form
+          onAddWord={this.onAddWord}
           onToggleForm={this.onToggleForm}
           shouldShowForm={this.state.shouldShowForm}
         />
