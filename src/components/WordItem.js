@@ -4,6 +4,12 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 export default class WordItem extends Component {
   renderItemWord = word => {
+    const {filterMode} = this.props;
+    if (filterMode === 'Show_Forgot' && !word.isMemorized) {
+      return null;
+    } else if (filterMode === 'Show_Memorized' && word.isMemorized) {
+      return null;
+    }
     return (
       <View style={styles.containerWord} key={word.id.toString()}>
         <View style={styles.containerText}>

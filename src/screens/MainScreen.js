@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 import RNPickerSelect from 'react-native-picker-select';
+import Word from '../components/Word';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -108,41 +109,6 @@ export default class MainScreen extends Component {
       );
     }
   };
-  renderItemWord = word => {
-    const {filterMode} = this.state;
-    if (filterMode === 'Show_Forgot' && !word.isMemorized) {
-      return null;
-    } else if (filterMode === 'Show_Memorized' && word.isMemorized) {
-      return null;
-    }
-    return (
-      <View style={styles.containerWord} key={word.id.toString()}>
-        <View style={styles.containerText}>
-          <Text style={styles.textEn}>{word.en}</Text>
-          <Text style={styles.textVn}>
-            {word.isMemorized ? '----' : word.vn}
-          </Text>
-        </View>
-        <View style={styles.containerTouchable}>
-          <TouchableOpacity
-            onPress={() => this.toggleWord(word)}
-            style={{
-              ...styles.touchableMemorized,
-              backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
-            }}>
-            <Text style={styles.textSize}>
-              {word.isMemorized ? 'Forgot' : 'Memorized'}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.removeWord(word)}
-            style={styles.touchableRemove}>
-            <Text style={styles.textSize}>Remove</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
   renderFilter = () => {
     return (
       <View style={styles.containerPickerStyle}>
@@ -164,7 +130,7 @@ export default class MainScreen extends Component {
       <View style={styles.container}>
         {this.renderForm(this.state.shouldShowForm)}
         {this.renderFilter()}
-        {this.state.words.map(word => this.renderItemWord(word))}
+        <Word filterMode={this.state.filterMode} data={this.state.words} />
       </View>
     );
   }
