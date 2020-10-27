@@ -1,17 +1,10 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import AppDimensions from '../utils/AppDimensions';
-import RNPickerSelect from 'react-native-picker-select';
+import {View, StyleSheet} from 'react-native';
 import Word from '../components/Word';
 import Form from '../components/Form';
+import Filter from '../components/Filter';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -66,27 +59,11 @@ export default class MainScreen extends Component {
     this.textInputEn.clear();
     this.textInputVn.clear();
   };
-  renderFilter = () => {
-    return (
-      <View style={styles.containerPickerStyle}>
-        <RNPickerSelect
-          onValueChange={value => {
-            this.setState({filterMode: value});
-          }}
-          items={[
-            {label: 'Show All', value: 'Show_All'},
-            {label: 'Show Forgot', value: 'Show_Forgot'},
-            {label: 'Show Memorized', value: 'Show_Memorized'},
-          ]}
-        />
-      </View>
-    );
-  };
   render() {
     return (
       <View style={styles.container}>
         <Form shouldShowForm={this.state.shouldShowForm} />
-        {this.renderFilter()}
+        <Filter filterMode={this.state.filterMode} />
         <Word filterMode={this.state.filterMode} data={this.state.words} />
       </View>
     );
