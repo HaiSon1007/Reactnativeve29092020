@@ -39,7 +39,7 @@ export default class Form extends Component {
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.toggleForm()}
+              onPress={() => this.props.onToggleForm()}
               style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
@@ -49,7 +49,7 @@ export default class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => this.toggleForm()}
+          onPress={() => this.props.onToggleForm()}
           style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>

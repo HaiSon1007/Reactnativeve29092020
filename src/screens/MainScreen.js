@@ -39,7 +39,7 @@ export default class MainScreen extends Component {
     });
     this.setState({words: newWords});
   };
-  toggleForm = () => {
+  onToggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
   addWord = () => {
@@ -62,7 +62,10 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Form shouldShowForm={this.state.shouldShowForm} />
+        <Form
+          onToggleForm={this.onToggleForm}
+          shouldShowForm={this.state.shouldShowForm}
+        />
         <Filter filterMode={this.state.filterMode} />
         <Word filterMode={this.state.filterMode} data={this.state.words} />
       </View>
