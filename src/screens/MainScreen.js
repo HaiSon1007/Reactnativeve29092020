@@ -174,49 +174,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  containerWord: {
-    flexDirection: 'column',
-    height: AppDimensions.getHeight() / 7,
-    justifyContent: 'space-evenly',
-    backgroundColor: '#F0F0F0',
-    marginTop: 10,
-    marginHorizontal: 10,
-    borderRadius: 10,
-  },
-  containerText: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
-  textEn: {
-    color: '#28a845',
-    fontSize: AppDimensions.getWidth() / 20,
-  },
-  textVn: {
-    color: '#dd3545',
-    fontSize: AppDimensions.getWidth() / 20,
-  },
-  containerTouchable: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
-  touchableMemorized: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: '#28a845',
-  },
-  textSize: {
-    fontSize: AppDimensions.getWidth() / 20,
-  },
-  touchableRemove: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: '#FFC106',
-  },
-  containerTextInput: {
-    width: '100%',
-    height: 150,
-    justifyContent: 'space-evenly',
-  },
   textInput: {
     borderWidth: 1,
     height: 60,
