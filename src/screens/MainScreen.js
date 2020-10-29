@@ -21,7 +21,7 @@ export default class MainScreen extends Component {
       filterMode: null,
     };
   }
-  toggleWord = word => {
+  onToggleWord = word => {
     const newWords = this.state.words.map(item => {
       if (item.id === word.id) {
         return {...item, isMemorized: !item.isMemorized};
@@ -63,7 +63,11 @@ export default class MainScreen extends Component {
           shouldShowForm={this.state.shouldShowForm}
         />
         <Filter filterMode={this.state.filterMode} />
-        <Word filterMode={this.state.filterMode} data={this.state.words} />
+        <Word
+          onToggleWord={this.onToggleWord}
+          filterMode={this.state.filterMode}
+          data={this.state.words}
+        />
       </View>
     );
   }

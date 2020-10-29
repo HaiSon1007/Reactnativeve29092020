@@ -20,7 +20,7 @@ export default class WordItem extends Component {
         </View>
         <View style={styles.containerTouchable}>
           <TouchableOpacity
-            onPress={() => this.toggleWord(word)}
+            onPress={() => this.props.onToggleWord(word)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
