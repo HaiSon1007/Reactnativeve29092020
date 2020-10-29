@@ -6,6 +6,8 @@ export default class WordItem extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.item.isMemorized !== this.props.item.isMemorized) {
       return true;
+    } else if (nextProps.filterMode !== this.props.filterMode) {
+      return true;
     } else {
       return false;
     }
@@ -46,7 +48,6 @@ export default class WordItem extends Component {
     );
   };
   render() {
-    console.log('Render');
     return this.renderItemWord(this.props.item);
   }
 }
