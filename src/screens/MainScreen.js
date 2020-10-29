@@ -30,7 +30,7 @@ export default class MainScreen extends Component {
     });
     this.setState({words: newWords});
   };
-  removeWord = word => {
+  onRemoveWord = word => {
     const newWords = this.state.words.filter(item => {
       if (item.id === word.id) {
         return false;
@@ -55,6 +55,7 @@ export default class MainScreen extends Component {
     this.setState({words: newWords});
   };
   render() {
+    console.log('----------%%%%%------------');
     return (
       <View style={styles.container}>
         <Form
@@ -65,6 +66,7 @@ export default class MainScreen extends Component {
         <Filter filterMode={this.state.filterMode} />
         <Word
           onToggleWord={this.onToggleWord}
+          onRemoveWord={this.onRemoveWord}
           filterMode={this.state.filterMode}
           data={this.state.words}
         />

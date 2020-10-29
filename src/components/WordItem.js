@@ -3,6 +3,13 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 export default class WordItem extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.item.isMemorized !== this.props.item.isMemorized) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   renderItemWord = word => {
     const {filterMode} = this.props;
     if (filterMode === 'Show_Forgot' && !word.isMemorized) {
@@ -30,7 +37,7 @@ export default class WordItem extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.removeWord(word)}
+            onPress={() => this.props.onRemoveWord(word)}
             style={styles.touchableRemove}>
             <Text style={styles.textSize}>Remove</Text>
           </TouchableOpacity>
@@ -39,6 +46,7 @@ export default class WordItem extends Component {
     );
   };
   render() {
+    console.log('Render');
     return this.renderItemWord(this.props.item);
   }
 }
