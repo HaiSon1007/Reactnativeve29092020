@@ -21,6 +21,15 @@ const defaultStore = {
   filterMode: null,
 };
 const store = createStore((state = defaultStore, action) => {
+  if (action.type === 'TOGGLE_WORD') {
+    const newWords = state.words.map(item => {
+      if (item.id === action.id) {
+        return {...item, isMemorized: !item.isMemorized};
+      }
+      return item;
+    });
+    return {...state, words: newWords};
+  }
   return state;
 });
 

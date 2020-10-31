@@ -12,14 +12,7 @@ class Word extends Component {
           data={this.props.words}
           extraData={this.props.words}
           keyExtractor={(item, index) => item.id.toString()}
-          renderItem={({item}) => (
-            <WordItem
-              onRemoveWord={this.props.onRemoveWord}
-              onToggleWord={this.props.onToggleWord}
-              item={item}
-              filterMode={this.props.filterMode}
-            />
-          )}
+          renderItem={({item}) => <WordItem item={item} />}
         />
       </View>
     );
@@ -27,6 +20,6 @@ class Word extends Component {
 }
 
 const mapStateToProps = state => {
-  return {filterMode: state.filterMode, words: state.words};
+  return {words: state.words};
 };
 export default connect(mapStateToProps)(Word);
