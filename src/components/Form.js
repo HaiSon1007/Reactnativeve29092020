@@ -21,7 +21,13 @@ class Form extends Component {
     if (txtEn.length <= 0 || txtVn.length <= 0) {
       return alert('Ban chưa nhập đủ thông tin');
     }
-    this.props.onAddWord(txtEn, txtVn);
+    const newWord = {
+      id: this.props.words.length + 1,
+      en: txtEn,
+      vn: txtVn,
+      isMemorized: false,
+    };
+    this.props.dispatch({type: 'ADD_WORD', word: newWord});
     this.setState({txtEn: '', txtVn: ''});
     this.textInputEn.clear();
     this.textInputVn.clear();
@@ -51,7 +57,7 @@ class Form extends Component {
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.onToggleForm()}
+              onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
               style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
@@ -61,7 +67,7 @@ class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => this.props.onToggleForm()}
+          onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
           style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
@@ -74,7 +80,7 @@ class Form extends Component {
 }
 
 const mapStateToProps = state => {
-  return {shouldShowForm: state.shouldShowForm};
+  return {shouldShowForm: state.shouldShowForm, words: state.words};
 };
 
 export default connect(mapStateToProps)(Form);

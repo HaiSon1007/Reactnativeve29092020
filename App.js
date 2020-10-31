@@ -30,6 +30,27 @@ const store = createStore((state = defaultStore, action) => {
     });
     return {...state, words: newWords};
   }
+  if (action.type === 'REMOVE_WORD') {
+    const newWords = state.words.filter(item => {
+      if (item.id === action.id) {
+        return false;
+      }
+      return true;
+    });
+    return {...state, words: newWords};
+  }
+  if (action.type === 'TOGGLE_FORM') {
+    return {...state, shouldShowForm: !state.shouldShowForm};
+  }
+  if (action.type === 'ADD_WORD') {
+    const {words} = state;
+    const newWords = Object.assign([], words);
+    newWords.unshift(action.word);
+    return {...state, words: newWords};
+  }
+  if (action.type === 'SET_FILTER_MODE') {
+    return {...state, filterMode: action.filterMode};
+  }
   return state;
 });
 

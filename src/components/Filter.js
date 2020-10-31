@@ -10,7 +10,7 @@ class Filter extends Component {
         <RNPickerSelect
           value={this.props.filterMode}
           onValueChange={value => {
-            this.props.onSetFilterMode(value);
+            this.props.dispatch({type: 'SET_FILTER_MODE', filterMode: value});
           }}
           items={[
             {label: 'Show All', value: 'Show_All'},
