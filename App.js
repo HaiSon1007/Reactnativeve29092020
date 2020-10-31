@@ -7,27 +7,27 @@ import Filter from './src/components/Filter';
 import Box from './src/components/Box';
 import Word from './src/components/Word';
 import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
-const store = createStore(function(state = {count: 1}, action) {
+const store = createStore((state = {count: 10}, action) => {
   if (action.type === 'INCREASE') {
     return {count: state.count + 1};
   }
   return state;
 });
 
-console.log(store.getState());
-store.dispatch({type: 'INCREASE'});
-console.log(store.getState());
-
 export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
-        <MainScreen />
+        {/* <MainScreen /> */}
         {/* <Form /> */}
         {/* <Filter /> */}
         {/* <Box /> */}
         {/* <Word /> */}
+        <Provider store={store}>
+          <Box />
+        </Provider>
       </SafeAreaView>
     );
   }

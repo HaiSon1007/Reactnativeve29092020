@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Child extends Component {
+class Child extends Component {
   render() {
     return (
       <View>
         <View style={styles.eventgroup}>
           <TouchableOpacity
-            onPress={() => this.props.onIncrease()}
+            onPress={() => this.props.dispatch({type: 'INCREASE'})}
             style={styles.boxIncrease}>
             <Text style={styles.increase}>InCrease</Text>
           </TouchableOpacity>
@@ -23,6 +24,7 @@ export default class Child extends Component {
   }
 }
 
+export default connect()(Child);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

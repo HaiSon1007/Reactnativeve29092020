@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import Child from './Child';
-export default class Box extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-  }
-  onIncrease = () => {
-    this.setState({count: this.state.count + 1});
-  };
+import {connect} from 'react-redux';
+
+class Box extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.textCount}>Count : {this.state.count}</Text>
-        <Child onIncrease={this.onIncrease} />
+        <Text style={styles.textCount}>Count : {this.props.count}</Text>
+        <Child />
       </View>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {count: state.count};
+};
+
+export default connect(mapStateToProps)(Box);
 
 const styles = StyleSheet.create({
   container: {
