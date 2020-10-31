@@ -47,16 +47,8 @@ export default class MainScreen extends Component {
     return (
       <View style={styles.container}>
         <Form />
-        {/* <Filter
-          onSetFilterMode={this.onSetFilterMode}
-          filterMode={this.state.filterMode}
-        />
-        <Word
-          onToggleWord={this.onToggleWord}
-          onRemoveWord={this.onRemoveWord}
-          filterMode={this.state.filterMode}
-          data={this.state.words}
-        /> */}
+        <Filter />
+        <Word />
       </View>
     );
   }
