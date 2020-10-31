@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-export default class Form extends Component {
+import {connect} from 'react-redux';
+
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,6 +72,12 @@ export default class Form extends Component {
     return this.renderForm(this.props.shouldShowForm);
   }
 }
+
+const mapStateToProps = state => {
+  return {shouldShowForm: state.shouldShowForm};
+};
+
+export default connect(mapStateToProps)(Form);
 
 const styles = StyleSheet.create({
   containerTextInput: {

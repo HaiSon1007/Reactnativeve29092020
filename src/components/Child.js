@@ -15,7 +15,9 @@ class Child extends Component {
           <TouchableOpacity style={styles.boxDescrease}>
             <Text style={styles.descrease}>DeCrease</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.boxReset}>
+          <TouchableOpacity 
+            onPress={() => this.props.dispatch({type: 'RESET', count: 0})}
+            style={styles.boxReset}>
             <Text style={styles.reset}>Reset</Text>
           </TouchableOpacity>
         </View>
