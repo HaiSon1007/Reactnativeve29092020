@@ -17,12 +17,41 @@ const defaultWords = [
   {id: 5, en: 'Five', vn: 'Nam', isMemorized: false},
 ];
 function wordReducer(state = defaultWords, action) {
+  if (action.type === 'TOGGLE_WORD') {
+    const newWords = state.map(item => {
+      if (item.id === action.id) {
+        return {...item, isMemorized: !item.isMemorized};
+      }
+      return item;
+    });
+    return newWords;
+  }
+  if (action.type === 'REMOVE_WORD') {
+    const newWords = state.filter(item => {
+      if (item.id === action.id) {
+        return false;
+      }
+      return true;
+    });
+    return newWords;
+  }
+  if (action.type === 'ADD_WORD') {
+    const newWords = Object.assign([], state);
+    newWords.unshift(action.word);
+    return newWords;
+  }
   return state;
 }
 function shouldShowFormReducer(state = false, action) {
+  if (action.type === 'TOGGLE_FORM') {
+    return !state;
+  }
   return state;
 }
 function filterModeReducer(state = null, action) {
+  if (action.type === 'SET_FILTER_MODE') {
+    return action.filterMode;
+  }
   return state;
 }
 
@@ -45,35 +74,3 @@ export default class App extends Component {
     );
   }
 }
-
-// if (action.type === 'TOGGLE_WORD') {
-//   const newWords = state.words.map(item => {
-//     if (item.id === action.id) {
-//       return {...item, isMemorized: !item.isMemorized};
-//     }
-//     return item;
-//   });
-//   return {...state, words: newWords};
-// }
-// if (action.type === 'REMOVE_WORD') {
-//   const newWords = state.words.filter(item => {
-//     if (item.id === action.id) {
-//       return false;
-//     }
-//     return true;
-//   });
-//   return {...state, words: newWords};
-// }
-// if (action.type === 'TOGGLE_FORM') {
-//   return {...state, shouldShowForm: !state.shouldShowForm};
-// }
-// if (action.type === 'ADD_WORD') {
-//   const {words} = state;
-//   const newWords = Object.assign([], words);
-//   newWords.unshift(action.word);
-//   return {...state, words: newWords};
-// }
-// if (action.type === 'SET_FILTER_MODE') {
-//   return {...state, filterMode: action.filterMode};
-// }
-// return state;
