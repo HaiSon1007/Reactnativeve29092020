@@ -6,30 +6,8 @@ import Form from './src/components/Form';
 import Filter from './src/components/Filter';
 import Box from './src/components/Box';
 import Word from './src/components/Word';
-import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-
-
-function shouldShowFormReducer(state = false, action) {
-  if (action.type === 'TOGGLE_FORM') {
-    return !state;
-  }
-  return state;
-}
-function filterModeReducer(state = null, action) {
-  if (action.type === 'SET_FILTER_MODE') {
-    return action.filterMode;
-  }
-  return state;
-}
-
-const rootReducer = combineReducers({
-  words: wordReducer,
-  shouldShowForm: shouldShowFormReducer,
-  filterMode: filterModeReducer,
-});
-
-const store = createStore(rootReducer);
+import store from './src/redux/store';
 
 export default class App extends Component {
   render() {
