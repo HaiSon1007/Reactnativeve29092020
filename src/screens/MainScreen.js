@@ -5,22 +5,16 @@ import {View, StyleSheet} from 'react-native';
 import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
+import axios from 'axios';
 
 export default class MainScreen extends Component {
   componentDidMount() {
-    fetch('https://servernode29092020.herokuapp.com/word', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        en: 'Three',
+    axios
+      .post('https://servernode29092020.herokuapp.com/word', {
+        en: 'Four',
         vn: 'Ba',
-      }),
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
+      })
+      .then(response => console.log(response.data))
       .catch(error => console.log(error));
   }
   render() {
