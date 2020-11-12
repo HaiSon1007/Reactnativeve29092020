@@ -7,6 +7,22 @@ import Form from '../components/Form';
 import Filter from '../components/Filter';
 
 export default class MainScreen extends Component {
+  componentDidMount() {
+    fetch('https://servernode29092020.herokuapp.com/word', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        en: 'Three',
+        vn: 'Ba',
+      }),
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error));
+  }
   render() {
     return (
       <View style={styles.container}>
