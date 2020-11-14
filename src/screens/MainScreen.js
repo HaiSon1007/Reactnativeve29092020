@@ -5,17 +5,12 @@ import {View, StyleSheet} from 'react-native';
 import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
-import axios from 'axios';
+import actioncreatetors from '../redux/action/actioncreatetors';
+import {connect} from 'react-redux';
 
-export default class MainScreen extends Component {
+class MainScreen extends Component {
   componentDidMount() {
-    axios
-      .post('https://servernode29092020.herokuapp.com/word', {
-        en: 'Four',
-        vn: 'Ba',
-      })
-      .then(response => console.log(response.data))
-      .catch(error => console.log(error));
+    this.props.fetchWord();
   }
   render() {
     return (
@@ -27,6 +22,10 @@ export default class MainScreen extends Component {
     );
   }
 }
+export default connect(
+  null,
+  actioncreatetors,
+)(MainScreen);
 
 const styles = StyleSheet.create({
   container: {
