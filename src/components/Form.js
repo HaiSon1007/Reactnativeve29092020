@@ -7,6 +7,7 @@ import {
   TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';
+import actioncreatetors from '../redux/action/actioncreatetors';
 
 class Form extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Form extends Component {
       vn: txtVn,
       isMemorized: false,
     };
-    this.props.dispatch({type: 'ADD_WORD', word: newWord});
+    this.props.addWord(newWord);
     this.setState({txtEn: '', txtVn: ''});
     this.textInputEn.clear();
     this.textInputVn.clear();
@@ -57,7 +58,7 @@ class Form extends Component {
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
+              onPress={this.props.toggleForm}
               style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
@@ -67,7 +68,7 @@ class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => this.props.dispatch({type: 'TOGGLE_FORM'})}
+          onPress={this.props.toggleForm}
           style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
@@ -83,7 +84,10 @@ const mapStateToProps = state => {
   return {shouldShowForm: state.shouldShowForm, words: state.words};
 };
 
-export default connect(mapStateToProps)(Form);
+export default connect(
+  mapStateToProps,
+  actioncreatetors,
+)(Form);
 
 const styles = StyleSheet.create({
   containerTextInput: {
