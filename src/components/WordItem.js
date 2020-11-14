@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../utils/AppDimensions';
 import {connect} from 'react-redux';
+import actioncreatetors from '../redux/action/actioncreatetors';
 
 class WordItem extends Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -31,9 +32,7 @@ class WordItem extends Component {
         </View>
         <View style={styles.containerTouchable}>
           <TouchableOpacity
-            onPress={() =>
-              this.props.dispatch({type: 'TOGGLE_WORD', id: word.id})
-            }
+            onPress={() => this.props.toggleWord(word.id)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
@@ -61,7 +60,10 @@ class WordItem extends Component {
 const mapStateToProps = state => {
   return {filterMode: state.filterMode};
 };
-export default connect(mapStateToProps)(WordItem);
+export default connect(
+  mapStateToProps,
+  actioncreatetors,
+)(WordItem);
 
 const styles = StyleSheet.create({
   containerWord: {
