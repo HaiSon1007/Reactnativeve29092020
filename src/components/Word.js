@@ -11,7 +11,7 @@ class Word extends Component {
         <FlatList
           data={this.props.words}
           extraData={this.props.words}
-          keyExtractor={(item, index) => item.id.toString()}
+          keyExtractor={(item, index) => item._id.toString()}
           renderItem={({item}) => <WordItem item={item} />}
         />
       </View>

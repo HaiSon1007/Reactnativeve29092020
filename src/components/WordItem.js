@@ -23,7 +23,7 @@ class WordItem extends Component {
       return null;
     }
     return (
-      <View style={styles.containerWord} key={word.id.toString()}>
+      <View style={styles.containerWord} key={word._id.toString()}>
         <View style={styles.containerText}>
           <Text style={styles.textEn}>{word.en}</Text>
           <Text style={styles.textVn}>
@@ -32,7 +32,7 @@ class WordItem extends Component {
         </View>
         <View style={styles.containerTouchable}>
           <TouchableOpacity
-            onPress={() => this.props.toggleWord(word.id)}
+            onPress={() => this.props.toggleWord(word._id)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
@@ -42,7 +42,7 @@ class WordItem extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.props.removeWord(word.id)}
+            onPress={() => this.props.removeWord(word._id)}
             style={styles.touchableRemove}>
             <Text style={styles.textSize}>Remove</Text>
           </TouchableOpacity>

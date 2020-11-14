@@ -5,12 +5,12 @@ function setFilterMode(filterMode) {
   return {type: actionType.ACTION_TYPE_SET_FILTER_MODE, filterMode};
 }
 
-function toggleWord(id) {
-  return {type: actionType.ACTION_TYPE_TOGGLE_WORD, id};
+function toggleWord(_id) {
+  return {type: actionType.ACTION_TYPE_TOGGLE_WORD, _id};
 }
 
-function removeWord(id) {
-  return {type: actionType.ACTION_TYPE_REMOVE_WORD, id};
+function removeWord(_id) {
+  return {type: actionType.ACTION_TYPE_REMOVE_WORD, _id};
 }
 
 function addWord(word) {
@@ -25,7 +25,12 @@ function fetchWord() {
   return dispatch => {
     axios
       .get('https://servernode29092020.herokuapp.com/word')
-      .then(response => console.log(response.data))
+      .then(response =>
+        dispatch({
+          type: actionType.ACTION_TYPE_FETCH_WORD,
+          words: response.data.words,
+        }),
+      )
       .catch(error => console.log(error));
   };
 }
