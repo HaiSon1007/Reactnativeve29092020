@@ -5,7 +5,7 @@ export default function wordReducer(state = [], action) {
   if (action.type === 'TOGGLE_WORD') {
     const newWords = state.map(item => {
       if (item._id === action._id) {
-        return {...item, isMemorized: !item.isMemorized};
+        return action.word;
       }
       return item;
     });

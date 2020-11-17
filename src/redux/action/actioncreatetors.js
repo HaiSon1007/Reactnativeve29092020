@@ -5,12 +5,40 @@ function setFilterMode(filterMode) {
   return {type: actionType.ACTION_TYPE_SET_FILTER_MODE, filterMode};
 }
 
-function toggleWord(_id) {
-  return {type: actionType.ACTION_TYPE_TOGGLE_WORD, _id};
+// {type: actionType.ACTION_TYPE_TOGGLE_WORD, _id}
+function toggleWord(_id, isMemorized) {
+  return dispatch => {
+    axios
+      .put(`https://servernode29092020.herokuapp.com/word/${_id}`, {
+        isMemorized,
+      })
+      .then(response => {
+        if (response.data.success) {
+          dispatch({
+            type: actionType.ACTION_TYPE_TOGGLE_WORD,
+            _id,
+            word: response.data.word,
+          });
+        }
+      })
+      .catch(error => console.log(error));
+  };
 }
 
 function removeWord(_id) {
-  return {type: actionType.ACTION_TYPE_REMOVE_WORD, _id};
+  return dispatch => {
+    axios
+      .delete(`https://servernode29092020.herokuapp.com/word/${_id}`)
+      .then(response => {
+        if (response.data.success) {
+          dispatch({
+            type: actionType.ACTION_TYPE_REMOVE_WORD,
+            _id,
+          });
+        }
+      })
+      .catch(error => console.log(error));
+  };
 }
 
 function addWord(en, vn) {
