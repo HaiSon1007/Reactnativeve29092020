@@ -22,7 +22,7 @@ export default function wordReducer(state = [], action) {
   }
   if (action.type === 'ADD_WORD') {
     const newWords = Object.assign([], state);
-    newWords.unshift(action.word);
+    newWords.push(action.word);
     return newWords;
   }
   return state;

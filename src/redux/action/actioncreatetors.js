@@ -13,8 +13,20 @@ function removeWord(_id) {
   return {type: actionType.ACTION_TYPE_REMOVE_WORD, _id};
 }
 
-function addWord(word) {
-  return {type: actionType.ACTION_TYPE_ADD_WORD, word};
+function addWord(en, vn) {
+  return dispatch => {
+    axios
+      .post('https://servernode29092020.herokuapp.com/word', {en, vn})
+      .then(response => {
+        if (response.data.success) {
+          dispatch({
+            type: actionType.ACTION_TYPE_ADD_WORD,
+            word: response.data.word,
+          });
+        }
+      })
+      .catch(error => console.log(error));
+  };
 }
 
 function toggleForm() {

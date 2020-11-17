@@ -22,13 +22,7 @@ class Form extends Component {
     if (txtEn.length <= 0 || txtVn.length <= 0) {
       return alert('Ban chưa nhập đủ thông tin');
     }
-    const newWord = {
-      id: this.props.words.length + 1,
-      en: txtEn,
-      vn: txtVn,
-      isMemorized: false,
-    };
-    this.props.addWord(newWord);
+    this.props.addWord(txtEn, txtVn);
     this.setState({txtEn: '', txtVn: ''});
     this.textInputEn.clear();
     this.textInputVn.clear();
